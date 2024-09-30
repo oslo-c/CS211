@@ -3,20 +3,35 @@
 import java.awt.*;
 
 public class Bear extends Critter {
+    private boolean polar;
+    private int frontSlash = 0;
     
     public Bear(boolean polar) {
-        // TODO: your logic
+        this.polar = polar;
     }
     
     public Critter.Action getMove(CritterInfo info) {
-        // TODO: your logic
+
+        frontSlash++;
+        if (info.frontThreat()) { // if enemy in front, infect
+            return Action.INFECT;
+        } else if (info.getFront() == Neighbor.EMPTY) { // else if possible, hop 
+            return Action.HOP;
+        }
+        return Action.LEFT; //else turn left
     }
 
     public Color getColor() {
-        // TODO: your logic
+        if (polar) {
+            return Color.WHITE;
+        }
+        return Color.BLACK;
     }
 
     public String toString() {
-        // TODO: your logic
+        if (frontSlash % 2 == 0) { // Alternates on turns
+            return "/";
+        }
+        return "\\";
     }
 }
