@@ -1,30 +1,17 @@
 // CS 211 HW 2
 // Article Reverser
-//   Reverse the lines of the input article.
-//   For each line, the words should also be reversed.
-//
-//   For example, if your article has two lines:
-//
-//     This is line 1.
-//     And, this is line 2.
-//
-//   The "reversed" should print as:
-//
-//     2. line is this And,
-//     1. line is This
-//
-//   Please use ArrayList to help you.
-//
+// Ethan Hamilton
 
 
+// This program takes an plaintext input file, reads it, then prints it both forwards and backwards
 import java.io.*;
 import java.util.*;
 
 public class ArticleReverser {
 
     public static void main(String[] args)  throws FileNotFoundException {
-        // TODO: change path to match where your input file is located
-        File f = new File("/sample_input.txt");
+        // Replace with path to test file
+        File f = new File("HW2_sample_input.txt");
 
         ArticleReverser r = new ArticleReverser();
         r.readLines(f);
@@ -36,41 +23,48 @@ public class ArticleReverser {
         r.reversePrint();
     }
 
+    // Each element in lines is an ArrayList of the elements in the corresponding line
     private List<List<String>> lines = new ArrayList<List<String>>();
 
     public void readLines(File inputFile) throws FileNotFoundException {
-        // Reads input file, puts data into the above ArrayList
+        // Reads input file one line at a time
         Scanner lineScan = new Scanner(inputFile);
         int index = 0;
 
         while (lineScan.hasNextLine()) {
             int subIndex = 0;
             String line = lineScan.nextLine();
-            List<String> nextLine = new ArrayList<String>(); // Creates new ArrayList object to house line elements
+            List<String> currentLine = new ArrayList<String>(); // Creates new ArrayList to house elements from individual lines
 
-            Scanner elementScan = new Scanner(line);
+            Scanner elementScan = new Scanner(line); // Reads elements from single line
             while (elementScan.hasNext()) {
-                nextLine.add(subIndex, elementScan.next());
+                currentLine.add(subIndex, elementScan.next()); // Adds String elements to ArrayList<String> currentLine
                 subIndex++;
             }
-            lines.add(index, nextLine);
+            lines.add(index, currentLine); // Adds currentLine to lines
             index++;
-            }
         }
+    }
 
     public void print() {
         // Prints the original article as it was written
         for (List<String> line: lines) {
-            System.out.println(line);
+            for (String element: line) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
         }
     }
 
     public void reversePrint() {
-        // TODO: print with lines reversed, and each line with words reversed
-        for (int i = lines.size(); i > 0; i--) {
-            for (int j = lines[i].length(); j > 0; j--) {
-                System.out.print(line(j));
+        // Prints reversed lines, in reversed order
+        for (int i = lines.size() - 1; i >= 0; i--) {
+            List<String> line = lines.get(i);
+            for (int j = line.size() - 1; j >= 0; j--) {
+                System.out.print(line.get(j) + " ");
             }
+            System.out.println();
         }
     }
 }
+
