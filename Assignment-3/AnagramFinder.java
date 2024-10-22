@@ -33,7 +33,7 @@ public class AnagramFinder {
         AnagramFinder finder = new AnagramFinder(f);
 
         for(String original: originals) {
-            finder.printAnagrams2(original);
+            finder.printAnagrams(original);
         }
     }
 
@@ -56,8 +56,7 @@ public class AnagramFinder {
         input.close();
     }
 
-    // This is the original version of printAnagrams which prints all the anagrams of the given word. If the word is not in the dictionary,
-    // it will print a message saying so.
+    // This method prints all the anagrams of the given word. If the word is not in the dictionary,it will print a message saying so.
     public void printAnagrams(String word) {
         String canonicalWord = new LetterInventory(word).getCanonical();
         if (canonicalMap.containsKey(canonicalWord)) {
@@ -72,7 +71,7 @@ public class AnagramFinder {
     }
 
     // This is a more advanced version of printAnagrams which omits the given word from the list of anagrams. If the word is not in the dictionary,
-    // or if the word is the only listed entry in the dictionary, it will print a message saying so.
+    // ***or if the word is the only listed entry in the dictionary***, it will print a message saying so.
     public void printAnagrams2(String word) {
         String canonicalWord = new LetterInventory(word).getCanonical();
         System.out.print("Your input is: " + word + ".");
