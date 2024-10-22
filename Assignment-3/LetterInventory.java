@@ -17,7 +17,7 @@ public class LetterInventory {
         Collections.sort(canonical);
     }
     
-    // Returns the canonical form of the input word
+    // Returns the canonical form of the input word as a String
     public String getCanonical() {
         String result = "";
         for (char c: canonical) {
