@@ -47,7 +47,7 @@ public class ArticleReverser {
     }
 
     public void print() {
-        // Prints the original article as it was written
+        // Prints the original article as was written
         for (List<String> line: lines) {
             for (String element: line) {
                 System.out.print(element + " ");
